@@ -18,6 +18,11 @@ RUN go install -v ./...
 
 # ビルド処理 ビルドするときに必要なので環境変数をセットする。
 ENV CGO_ENABLED 0
+
+# Swaggerドキュメント
+RUN go get -u github.com/swaggo/swag/cmd/swag
+RUN swag i
+
 # 実際にビルド
 RUN go build -v -o api_server /go/src/github.com/techforward/ECscript_server/main.go
 RUN ls /go/src/github.com/techforward/ECscript_server
