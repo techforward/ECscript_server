@@ -1,0 +1,9 @@
+vversion: '3'
+services:
+  api:
+    build: ./api
+    command: go run main.go
+    volumes:
+      - .:/app 
+    ports:
+      - 1323:1323

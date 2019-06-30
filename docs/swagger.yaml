@@ -1,0 +1,742 @@
+basePath: /
+definitions:
+  models.Address:
+    properties:
+      address1:
+        example: Kita-ku, Tokyo, Jp
+        type: string
+      address2:
+        example: 23-3-12
+        type: string
+      created_at:
+        example: "2019-06-14 05:59:41"
+        type: string
+      postcode:
+        example: 163-0011
+        type: string
+      ulid:
+        example: 0000XSNJG0MQJHBF4QX1EFD6Y3
+        type: string
+      updated_at:
+        example: "2019-06-15 15:01:52"
+        type: string
+    type: object
+  models.Cart:
+    properties:
+      boughtAt:
+        example: "2019-06-15 15:59:41"
+        type: string
+      created_at:
+        example: "2019-06-14 05:59:41"
+        type: string
+      ulid:
+        example: 0000XSNJG0MQJHBF4QX1EFD6Y3
+        type: string
+      updated_at:
+        example: "2019-06-15 15:01:52"
+        type: string
+      userUlid:
+        example: 0000XSNJG0JFGRHF4QX1EFD6Y3
+        type: string
+    type: object
+  models.Item:
+    properties:
+      amount:
+        example: 4
+        format: int64
+        type: integer
+      context:
+        example: item context
+        type: string
+      created_at:
+        description: |-
+          CreatedAt, UpdatedAt, DeleteAt という time.Time 型のメンバを追加すると、
+          GORM側でここに追加・更新・削除日時を自動的に入るようになる。
+        example: "2019-06-14 05:59:41"
+        type: string
+      name:
+        example: item name
+        type: string
+      priority:
+        example: 1
+        format: int64
+        type: integer
+      ulid:
+        example: 0000XSNJG0MQJHBF4QX1EFD6Y3
+        type: string
+      updated_at:
+        example: "2019-06-15 15:01:52"
+        type: string
+    type: object
+  models.ItemImage:
+    properties:
+      created_at:
+        example: "2019-06-14 05:59:41"
+        type: string
+      itemUlid:
+        example: 0000XSNJG0JFGRHF4QX1EFD6Y3
+        type: string
+      path:
+        example: asdada.png
+        type: string
+      ulid:
+        example: 0000XSNJG0MQJHBF4QX1EFD6Y3
+        type: string
+      updated_at:
+        example: "2019-06-15 15:01:52"
+        type: string
+    type: object
+  models.Order:
+    properties:
+      addressUlid:
+        example: 0000XSNJG0JFGRHF4QX1EFDAH2
+        type: string
+      created_at:
+        example: "2019-06-14 05:59:41"
+        type: string
+      isCanceled:
+        example: 0
+        type: integer
+      status:
+        example: 0
+        type: integer
+      ulid:
+        example: 0000XSNJG0MQJHBF4QX1EFD6Y3
+        type: string
+      updated_at:
+        example: "2019-06-15 15:01:52"
+        type: string
+      userUlid:
+        example: 0000XSNJG0JFGRHF4QX1EFD6Y3
+        type: string
+    type: object
+  models.User:
+    properties:
+      addressUlid:
+        example: 0000XSHJW0MQJ3JK3QX1EFD6Y3
+        type: string
+      cartUlid:
+        example: 0000XSHJW0MQJHBF4QX1EFD6Y3
+        type: string
+      created_at:
+        example: "2019-06-14 05:59:41"
+        type: string
+      email:
+        example: user@gmail.com
+        type: string
+      firebaseUid:
+        example: 0gwEMgeG0ePdEZOZV6ZchBgWyE42
+        type: string
+      name:
+        example: user124
+        type: string
+      stripeId:
+        example: cus_fherfjwh234rhej
+        type: string
+      ulid:
+        description: gorm:"primary_key"を消すとテーブルが空っぽになる
+        example: 0000XSNJG0MQJHBF4QX1EFD6Y3
+        type: string
+      updated_at:
+        example: "2019-06-15 15:01:52"
+        type: string
+    type: object
+  models.UserAddress:
+    properties:
+      address_ulid:
+        example: 0000XSNJG0JFGRHF4QX1EFDAH2
+        type: string
+      created_at:
+        example: "2019-06-14 05:59:41"
+        type: string
+      ulid:
+        example: 0000XSNJG0MQJHBF4QX1EFD6Y3
+        type: string
+      updated_at:
+        example: "2019-06-15 15:01:52"
+        type: string
+      user_ulid:
+        example: 0000XSNJG0JFGRHF4QX1EFD6Y3
+        type: string
+    type: object
+host: localhost:1323
+info:
+  contact: {}
+  description: API for the ECSite
+  license:
+    name: Techforward Inc.
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: ECSite API
+  version: "1.0"
+paths:
+  /address:
+    get:
+      consumes:
+      - application/json
+      description: get all addresses in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Address'
+            type: array
+      summary: get all addresses
+      tags:
+      - Address
+    post:
+      consumes:
+      - application/json
+      description: create new address in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Address'
+            type: object
+      summary: create new address
+      tags:
+      - Address
+  /address/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: deleting address in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Delete address
+      tags:
+      - Address
+    get:
+      consumes:
+      - application/json
+      description: get address in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Address'
+            type: object
+      summary: get address
+      tags:
+      - Address
+    put:
+      consumes:
+      - application/json
+      description: updating address in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Address'
+            type: object
+      summary: Update address
+      tags:
+      - Address
+  /auth/{id}:
+    get:
+      consumes:
+      - application/json
+      description: veryfy firebase token in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Veryfy firebase token
+      tags:
+      - Auth
+  /cart:
+    get:
+      consumes:
+      - application/json
+      description: get all carts in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Cart'
+            type: array
+      summary: get all carts
+      tags:
+      - Cart
+    post:
+      consumes:
+      - application/json
+      description: create new cart in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Cart'
+            type: object
+      summary: create new cart
+      tags:
+      - Cart
+  /cart/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: deleting cart in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Delete cart
+      tags:
+      - Cart
+    get:
+      consumes:
+      - application/json
+      description: get cart in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Cart'
+            type: object
+      summary: get cart
+      tags:
+      - Cart
+    put:
+      consumes:
+      - application/json
+      description: updating cart in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Cart'
+            type: object
+      summary: Update cart
+      tags:
+      - Cart
+  /item:
+    get:
+      consumes:
+      - application/json
+      description: 商品をリストで返す
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Item'
+            type: object
+        "404": {}
+      summary: 商品リスト
+      tags:
+      - Item
+    post:
+      consumes:
+      - application/json
+      description: create new item in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Item'
+            type: object
+      summary: create new item
+      tags:
+      - Item
+  /item/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: deleting item in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Delete item
+      tags:
+      - Item
+    get:
+      consumes:
+      - application/json
+      description: 商品を返す
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Item'
+            type: object
+        "404": {}
+      summary: 商品
+      tags:
+      - Item
+    put:
+      consumes:
+      - application/json
+      description: updating item in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Item'
+            type: object
+      summary: Update item
+      tags:
+      - Item
+  /item/{id}/image:
+    get:
+      consumes:
+      - application/json
+      description: get all ItemImages in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ItemImage'
+            type: array
+      summary: get all ItemImages
+      tags:
+      - ItemImage
+    post:
+      consumes:
+      - application/json
+      description: create new itemImage in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ItemImage'
+            type: object
+      summary: create new itemImage
+      tags:
+      - ItemImage
+  /item/{id}/image/{imageUlid}:
+    delete:
+      consumes:
+      - application/json
+      description: deleting itemImage in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Delete itemImage
+      tags:
+      - ItemImage
+    get:
+      consumes:
+      - application/json
+      description: get itemImage in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ItemImage'
+            type: object
+      summary: get itemImage
+      tags:
+      - ItemImage
+    put:
+      consumes:
+      - application/json
+      description: updating itemImage in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ItemImage'
+            type: object
+      summary: Update itemImage
+      tags:
+      - ItemImage
+  /order:
+    get:
+      consumes:
+      - application/json
+      description: 商品をリストで返す
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Order'
+            type: object
+        "404": {}
+      summary: 商品リスト
+      tags:
+      - Order
+    post:
+      consumes:
+      - application/json
+      description: create new order in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Order'
+            type: object
+      summary: create new order
+      tags:
+      - Order
+  /order/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: deleting order in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Delete order
+      tags:
+      - Order
+    get:
+      consumes:
+      - application/json
+      description: 商品を返す
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Order'
+            type: object
+        "404": {}
+      summary: 商品
+      tags:
+      - Order
+    put:
+      consumes:
+      - application/json
+      description: updating order in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Order'
+            type: object
+      summary: Update order
+      tags:
+      - Order
+  /payment/stripe:
+    post:
+      consumes:
+      - application/json
+      description: 決済を行う
+      produces:
+      - application/json
+      responses:
+        "200": {}
+        "404": {}
+      summary: 決済
+      tags:
+      - Stripe
+  /user:
+    get:
+      consumes:
+      - application/json
+      description: 商品をリストで返す
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+            type: object
+        "404": {}
+      summary: 商品リスト
+      tags:
+      - User
+    post:
+      consumes:
+      - application/json
+      description: create new user in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+            type: object
+      summary: create new user
+      tags:
+      - User
+  /user/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: deleting user in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Delete user
+      tags:
+      - User
+    get:
+      consumes:
+      - application/json
+      description: 商品を返す
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+            type: object
+        "404": {}
+      summary: 商品
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: updating user in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+            type: object
+      summary: Update user
+      tags:
+      - User
+  /user_address:
+    get:
+      consumes:
+      - application/json
+      description: get all user_addresses in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.UserAddress'
+            type: array
+      summary: get all user_addresses
+      tags:
+      - UserAddress
+    post:
+      consumes:
+      - application/json
+      description: create new user_address in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserAddress'
+            type: object
+      summary: create new user_address
+      tags:
+      - UserAddress
+  /user_address/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: deleting user_address in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Delete user_address
+      tags:
+      - UserAddress
+    get:
+      consumes:
+      - application/json
+      description: get user_address in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserAddress'
+            type: object
+      summary: get user_address
+      tags:
+      - UserAddress
+    put:
+      consumes:
+      - application/json
+      description: updating user_address in a ECsite
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserAddress'
+            type: object
+      summary: Update user_address
+      tags:
+      - UserAddress
+swagger: "2.0"
