@@ -1,14 +1,18 @@
 ## API server
 
 ### Docs
-`go run main.go`
+
+```
+swag i
+go run main.go
+```
 http://localhost:1323/swagger/index.html
 
 
 ### Build
 
 docker build -t ecsite .
-docker run -it --rm -p 1323:1323 ecsite
+docker run -it --rm -p 127.0.0.1:1323:1323 ecsite
 
 ### Production
 
