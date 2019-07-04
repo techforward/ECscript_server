@@ -17,8 +17,8 @@ docker run -it --rm -p 127.0.0.1:1323:1323 ecsite
 ### Production
 
 ```terminal
-server/api$ go build main.go 
-server/api$ ./main &
+server/api$ go build -v -o ECscript_server
+server/api$ ./ECscript_server
 ```
 
 ### Development
