@@ -23,6 +23,7 @@ RUN apk add --no-cache ca-certificates
 # Copy the binary to the production image from the builder stage.
 COPY --from=builder /go/src/github.com/techforward/ECscript_server/ECscript_server ECscript_server
 
+ENV MODE production
 ENV PORT 1323
 EXPOSE 1323
 
