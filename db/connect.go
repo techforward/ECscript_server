@@ -8,30 +8,15 @@ import (
 )
 
 func ConnectGORM() *gorm.DB {
-	env := "local_development"
-	if env == "local_test" {
-		// mysqld, err := mysqltest.NewMysqld(nil)
-		// if err != nil {
-		// 	log.Fatalf("Failed to start mysqld: %s", err)
-		// }
-		// defer mysqld.Stop()
-
-		// db, err := sql.Open("mysql", mysqld.Datasource("test", "", "", 0))
-
-		// if err != nil {
-		// 	panic(err.Error())
-		// }
-		// return db
-	}
-	config := config.SetEnvironment("local_development")
+	config := config.SetEnvironment()
 
 	DBMS := "mysql"
-	USER := config.Database.User
-	PASS := config.Database.Password
-	IP := config.Database.IP
-	PORT := config.Database.Port
+	USER := config.User
+	PASS := config.Password
+	IP := config.IP
+	PORT := config.Port
 	PROTOCOL := "tcp(" + IP + ":" + PORT + ")"
-	DBNAME := config.Database.Name
+	DBNAME := config.Name
 	PARSETIME := "parseTime=true"
 	//TIMEZONE := "loc=Asia%2FTokyo"
 

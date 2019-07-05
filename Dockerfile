@@ -1,40 +1,34 @@
-FROM golang:1.12 as build_env
+# Use the offical Golang image to create a build artifact.
+# This is based on Debian and sets the GOPATH to /go.
+# https://hub.docker.com/_/golang
+FROM golang:1.12 as builder
 
-# Set GOPATH/GOROOT environment variables
-RUN mkdir -p /go
-ENV GOPATH /go
-ENV PATH $GOPATH/bin:$PATH
-
-RUN apt-get update
-RUN apt-get upgrade -y
-
-
-# Set up app
+# Copy local code to the container image.
 WORKDIR /go/src/github.com/techforward/ECscript_server
-ADD . .
+COPY . .
 
-RUN go get -d -v ./...
-RUN go install -v ./...
+RUN go get -v ./...
 
-# ビルド処理 ビルドするときに必要なので環境変数をセットする。
-ENV CGO_ENABLED 0
+# Build the command inside the container.
+# (You may fetch or manage dependencies here,
+# either manually or with a tool like "godep".)
+ENV MODE production
+RUN CGO_ENABLED=0 GOOS=linux go build -v -o ECscript_server
 
-# Swaggerドキュメント
-RUN go get -u github.com/swaggo/swag/cmd/swag
-RUN swag i
+# Use a Docker multi-stage build to create a lean production image.
+# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+FROM alpine
+RUN apk add --no-cache ca-certificates
 
-# 実際にビルド
-RUN go build -v -o api_server /go/src/github.com/techforward/ECscript_server/main.go
-RUN ls /go/src/github.com/techforward/ECscript_server
+# Copy the binary to the production image from the builder stage.
+COPY --from=builder /go/src/github.com/techforward/ECscript_server/ECscript_server ECscript_server
 
-# 実行環境 alpineは軽量イメージ
-FROM alpine:latest
-WORKDIR /root/
-# build_envステージからバイナリファイルだけをコピーしてくる。
-COPY --from=build_env /go/src/github.com/techforward/ECscript_server/api_server .
-RUN ls
-
+ENV PORT 1323
 EXPOSE 1323
 
-# 起動時に実行
-CMD ["./api_server"]
+# Run the web service on container startup.
+CMD ["./ECscript_server"]
+
+# gcloud builds submit --tag gcr.io/ecsite-242111/github.com/techforward/test
+
+# gcloud beta run deploy --image gcr.io/ecsite-242111/github.com/techforward/test --platform managed

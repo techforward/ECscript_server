@@ -1,56 +1,51 @@
 package config
 
 import (
-	"io/ioutil"
-
-	yaml "gopkg.in/yaml.v2"
+	"flag"
+	"os"
+	"strings"
 )
 
-type Environment struct {
-	Development      Conf `yaml:"development"`
-	LocalDevelopment Conf `yaml:"local_development"`
-	Production       Conf `yaml:"production"`
-	Test             Conf `yaml:"test"`
-}
-
-type Conf struct {
-	Database Database `yaml:"db"`
-}
-
 type Database struct {
-	User     string `yaml:"user"`
-	Password string `yaml:"password"`
-	Name     string `yaml:"name"`
-	IP       string `yaml:"ip"`
-	Port     string `yaml:"port"`
+	User     string
+	Password string
+	Name     string
+	IP       string
+	Port     string
 }
 
-func SetEnvironment(env string) Conf {
-
-	var Config Conf
-
-	buf, err := ioutil.ReadFile("../config/environment.yaml")
-	// buf, err := ioutil.ReadFile("./config/environment.yaml")
-	if err != nil {
-		panic(err)
+func setDatabase(mode string) Database {
+	return Database{
+		User:     os.Getenv("DB_USER" + mode),
+		Password: os.Getenv("DB_PASS" + mode),
+		Name:     os.Getenv("DB_PASS" + mode),
+		IP:       os.Getenv("DB_PASS" + mode),
+		Port:     os.Getenv("DB_PASS" + mode),
 	}
 
-	var environment Environment
+}
 
-	err = yaml.Unmarshal(buf, &environment)
-	if err != nil {
-		panic(err)
-	}
+// SetEnvironment Set nvironment
+func SetEnvironment() Database {
+	var database Database
+	var mode string
 
-	switch env {
-	case "development":
-		Config = environment.Development
-	case "local_development":
-		Config = environment.LocalDevelopment
+	flag.StringVar(&mode, "mode", "", "run mode")
+	flag.VisitAll(func(f *flag.Flag) {
+		if s := os.Getenv(strings.ToUpper(f.Name)); s != "" {
+			f.Value.Set(s)
+		}
+	})
+	flag.Parse()
+
+	switch mode {
 	case "production":
-		Config = environment.Production
-	case "test":
-		Config = environment.Test
+		database = setDatabase("")
+	case "local":
+		database = setDatabase("_LOCAL")
+	default:
+		database = setDatabase("_TEST")
 	}
-	return Config
+
+	return database
 }
