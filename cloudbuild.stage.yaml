@@ -1,5 +1,5 @@
 steps:
 - name: gcr.io/cloud-builders/docker
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/github.com/techforward/ECscript_server/stage:${SHORT_SHA}', '.']
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/github.com/techforward/ecscript_server/stage:${SHORT_SHA}', '.']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ["push", "gcr.io/$PROJECT_ID/github.com/techforward/ECscript_server/stage"]
+  args: ["push", "gcr.io/$PROJECT_ID/github.com/techforward/ecscript_server/stage"]
