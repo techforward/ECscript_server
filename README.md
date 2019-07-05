@@ -14,7 +14,7 @@ http://localhost:1323/swagger/index.html
 ### Build
 
 docker build -t ecsite .
-docker run -it --rm -p 127.0.0.1:1323:1323 ecsite
+docker run -it --rm -p :1323:1323 ecsite
 
 ### Production
 
@@ -33,5 +33,5 @@ server/api$ go run main.go -mode local
 ### Testing
 
 ```terminal
-server/api$ go test -v ./handler\
+server/api$ go test -v ./handler
 ```

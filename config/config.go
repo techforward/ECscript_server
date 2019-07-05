@@ -18,9 +18,9 @@ func setDatabase(mode string) Database {
 	return Database{
 		User:     os.Getenv("DB_USER" + mode),
 		Password: os.Getenv("DB_PASS" + mode),
-		Name:     os.Getenv("DB_PASS" + mode),
-		IP:       os.Getenv("DB_PASS" + mode),
-		Port:     os.Getenv("DB_PASS" + mode),
+		Name:     os.Getenv("DB_NAME" + mode),
+		IP:       os.Getenv("DB_ADDR" + mode),
+		Port:     os.Getenv("DB_PORT" + mode),
 	}
 
 }
@@ -30,7 +30,7 @@ func SetEnvironment() Database {
 	var database Database
 	var mode string
 
-	flag.StringVar(&mode, "mode", "", "run mode")
+	flag.StringVar(&mode, "mode", "test", "run mode")
 	flag.VisitAll(func(f *flag.Flag) {
 		if s := os.Getenv(strings.ToUpper(f.Name)); s != "" {
 			f.Value.Set(s)
