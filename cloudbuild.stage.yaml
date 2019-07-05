@@ -4,4 +4,4 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ["push", "gcr.io/$PROJECT_ID/github.com/techforward/ecscript_server/stage"]
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['beta', 'run', 'deploy', 'ecscript-server-stage', '--image', 'gcr.io/$PROJECT_ID/github.com/techforward/ecscript_server/stage:${SHORT_SHA}', '--region', 'us-central1']
+  args: ['beta', 'run', 'deploy', 'ecscript-server-stage', '--image', 'gcr.io/$PROJECT_ID/github.com/techforward/ecscript_server/stage:${SHORT_SHA}', '--region', 'us-central1', '--platform', 'managed']

@@ -14,15 +14,12 @@ type Database struct {
 	Port     string
 }
 
-func setDatabase(mode string) Database {
-	return Database{
-		User:     os.Getenv("DB_USER" + mode),
-		Password: os.Getenv("DB_PASS" + mode),
-		Name:     os.Getenv("DB_NAME" + mode),
-		IP:       os.Getenv("DB_ADDR" + mode),
-		Port:     os.Getenv("DB_PORT" + mode),
-	}
-
+func (db *Database) setDatabase(mode string) {
+	db.User = os.Getenv("DB_USER" + mode)
+	db.Password = os.Getenv("DB_PASS" + mode)
+	db.Name = os.Getenv("DB_NAME" + mode)
+	db.IP = os.Getenv("DB_ADDR" + mode)
+	db.Port = os.Getenv("DB_PORT" + mode)
 }
 
 // SetEnvironment Set nvironment
@@ -40,11 +37,11 @@ func SetEnvironment() Database {
 
 	switch mode {
 	case "production":
-		database = setDatabase("")
+		database.setDatabase("")
 	case "local":
-		database = setDatabase("_LOCAL")
+		database.setDatabase("_LOCAL")
 	default:
-		database = setDatabase("_TEST")
+		database.setDatabase("_TEST")
 	}
 
 	return database
