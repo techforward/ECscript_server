@@ -4,7 +4,7 @@ steps:
       - kms
       - decrypt
       - --ciphertext-file=app-credential.json.enc
-      - --plaintext-file=secrets/app-credential.json
+      - --plaintext-file=app-credential.json
       - --location=global
       - --keyring=app-credential
       - --key=app-credential-key
