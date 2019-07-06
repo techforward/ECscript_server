@@ -3,7 +3,7 @@ steps:
     args:
       - kms
       - decrypt
-      - --project ${PROJECT_ID}
+      - --project=${PROJECT_ID}
       - --ciphertext-file=app-credential.json.enc
       - --plaintext-file=app-credential.json
       - --location=global
