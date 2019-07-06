@@ -3,8 +3,8 @@ steps:
     args:
       - kms
       - decrypt
-      - --ciphertext-file=app-credential.json.enc
-      - --plaintext-file=app-credential.json
+      - --ciphertext-file=/app-credential.json.enc
+      - --plaintext-file=/app-credential.json
       - --location=global
       - --keyring=app-credential
       - --key=app-credential-key
