@@ -1,7 +1,24 @@
 steps:
-- name: gcr.io/cloud-builders/docker
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/github.com/techforward/ecscript_server/stage:${SHORT_SHA}', '.']
-- name: 'gcr.io/cloud-builders/docker'
-  args: ["push", "gcr.io/$PROJECT_ID/github.com/techforward/ecscript_server/stage"]
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['beta', 'run', 'deploy', 'ecscript-server-stage', '--image', 'gcr.io/$PROJECT_ID/github.com/techforward/ecscript_server/stage:${SHORT_SHA}', '--region', 'us-central1', '--platform', 'managed']
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - kms
+      - decrypt
+      - --ciphertext-file=secrets/app-credential.json.enc
+      - --plaintext-file=secrets/app-credential.json
+      - --location=global
+      - --keyring=app-credential
+      - --key=app-credential-key
+    id: decrypt-app-credential
+    volumes:
+    - name: 'app-credential'
+      path: /workspace/secrets/app-credential.json
+  - name: gcr.io/cloud-builders/docker
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/github.com/techforward/ecscript_server/stage:${SHORT_SHA}',"--build-arg", "_GOOGLE_APPLICATION_CREDENTIALS=$_GOOGLE_APPLICATION_CREDENTIALS", '.']
+    waitFor: ['decrypt-app-credential']
+    volumes:
+    - name: 'app-credential'
+      path: /workspace/secrets/app-credential.json
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ["push", "gcr.io/$PROJECT_ID/github.com/techforward/ecscript_server/stage"]
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['beta', 'run', 'deploy', 'ecscript-server-stage', '--image', 'gcr.io/$PROJECT_ID/github.com/techforward/ecscript_server/stage:${SHORT_SHA}', '--region', 'us-central1', '--platform', 'managed']

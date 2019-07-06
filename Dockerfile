@@ -9,6 +9,9 @@ COPY . .
 
 RUN go get -v ./...
 
+RUN cp /workspace/secrets/app-credential.json app-credential.json
+ENV GOOGLE_APPLICATION_CREDENTIALS /app-credential.json
+
 # Build the command inside the container.
 # (You may fetch or manage dependencies here,
 # either manually or with a tool like "godep".)
@@ -30,6 +33,6 @@ EXPOSE 1323
 # Run the web service on container startup.
 CMD ["./ECscript_server"]
 
-# gcloud builds submit --tag gcr.io/ecsite-242111/github.com/techforward/test
+# gcloud builds submit --tag gcr.io/ecsite-242111/github.com/techforward/ecscript_server/stage
 
-# gcloud beta run deploy --image gcr.io/ecsite-242111/github.com/techforward/test --platform managed
+# gcloud beta run deploy --image gcr.io/ecsite-242111/github.com/techforward/ecscript_server/stage --platform managed

@@ -2,6 +2,11 @@
 
 https://test-4eayrshuaa-uc.a.run.app/swagger/index.html
 
+### Pre
+
+https://cloud.google.com/cloud-build/docs/securing-builds/use-encrypted-secrets-credentials?hl=ja
+
+
 ### Docs
 
 ```
