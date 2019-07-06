@@ -1,10 +1,6 @@
 steps:
   - name: gcr.io/cloud-builders/docker
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/github.com/techforward/ecscript_server/stage:${SHORT_SHA}', '.']
-    waitFor: ['decrypt-app-credential']
-    volumes:
-    - name: 'app-credential'
-      path: /workspace/app-credential.json
   - name: 'gcr.io/cloud-builders/docker'
     args: ["push", "gcr.io/$PROJECT_ID/github.com/techforward/ecscript_server/stage"]
   - name: 'gcr.io/cloud-builders/gcloud'
