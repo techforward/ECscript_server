@@ -22,6 +22,7 @@ import (
 // @host localhost:1323
 // @BasePath /
 func main() {
+
 	err := dotenv.Load()
 	if err != nil {
 		log.Fatalf("Error loading .env file: %v", err)

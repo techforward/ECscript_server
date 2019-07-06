@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"github.com/techforward/ECscript_server/models"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -9,6 +8,8 @@ import (
 	"net/url"
 	"strings"
 	"testing"
+
+	"github.com/techforward/ECscript_server/models"
 
 	"github.com/labstack/echo"
 	"github.com/stretchr/testify/assert"
@@ -20,7 +21,8 @@ var (
 	createdUser models.User
 	gotUser     models.User
 
-	testUserID string
+	testUserID      string
+	testFirebaseUID string
 )
 
 func TestUser(t *testing.T) {
@@ -31,12 +33,13 @@ func TestUser(t *testing.T) {
 
 func TestCreateUser(t *testing.T) {
 	userUlid := testUserID
+	firebaseUID := testFirebaseUID
 
 	// Setup
 	e := echo.New()
 	f := make(url.Values)
 	f.Set("ulid", userUlid)
-	f.Set("firebaseUid", "01DDS-X4GRR2-PSRKCDV-TRFA96WH")
+	f.Set("firebaseUid", firebaseUID)
 	f.Set("name", "ユーザさん")
 	f.Set("email", "test@me.com")
 	req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(f.Encode()))

@@ -4,19 +4,19 @@ import (
 	"github.com/techforward/ECscript_server/handler"
 
 	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
 )
 
 func AddressRouter(e *echo.Echo) {
 	g := e.Group("/address")
 
-	g.GET("/", handler.GetAllAddresses)
-	g.GET("/:id", handler.GetAddress)
+	g.GET("", handler.GetAllAddresses)
+	g.GET(":id", handler.GetAddress)
 
-	loginRequired := e.Group("/address")
+	g.POST("", handler.CreateAddress)
+	g.PUT(":id", handler.UpdateAddress)
+	g.DELETE(":id", handler.DeleteAddress)
 
-	loginRequired.Use(middleware.JWT([]byte("secret")))
-	loginRequired.POST("/", handler.CreateAddress)
-	loginRequired.PUT("/:id", handler.UpdateAddress)
-	loginRequired.DELETE("/:id", handler.DeleteAddress)
+	// g.POST("", handler.CreateAddress, middleware.JWT([]byte("secret")))
+	// g.PUT(":id", handler.UpdateAddress, middleware.JWT([]byte("secret")))
+	// g.DELETE(":id", handler.DeleteAddress, middleware.JWT([]byte("secret")))
 }

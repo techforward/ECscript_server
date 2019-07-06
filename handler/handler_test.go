@@ -1,15 +1,24 @@
 package handler
 
 import (
-	"github.com/techforward/ECscript_server/util"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/alexsasharegan/dotenv"
+	"github.com/techforward/ECscript_server/util"
 )
 
 func TestMain(m *testing.M) {
+
+	err := dotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file: %v", err)
+	}
+
 	// terminalWidth := goterm.Width()
 	// a := (terminalWidth - 12) / 2
 	b := strings.Repeat("=", 20)
@@ -25,6 +34,7 @@ func TestMain(m *testing.M) {
 	testItemID = util.NewUlid()
 	testOrderID = util.NewUlid()
 	testUserID = util.NewUlid()
+	testFirebaseUID = util.NewUlid()
 	testBoughtAt = time.Now().Format("2006-01-02T15:04:05Z")
 
 	fmt.Printf("=== Generate testAddressID: %v\n", testAddressID)
@@ -33,6 +43,7 @@ func TestMain(m *testing.M) {
 	fmt.Printf("=== Generate testItemID   : %v\n", testItemID)
 	fmt.Printf("=== Generate testOrderID  : %v\n", testOrderID)
 	fmt.Printf("=== Generate testUserID   : %v\n", testUserID)
+	fmt.Printf("=== Generate testFirebaseUID   : %v\n", testFirebaseUID)
 
 	code := m.Run()
 

@@ -1,6 +1,10 @@
 package db
 
 import (
+	"flag"
+	"os"
+	"strings"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
@@ -8,7 +12,21 @@ import (
 )
 
 func ConnectGORM() *gorm.DB {
-	config := config.SetEnvironment()
+	var mode string
+
+	if flag.Lookup("test.v") == nil {
+		flag.StringVar(&mode, "mode", "test", "run mode")
+		flag.VisitAll(func(f *flag.Flag) {
+			if s := os.Getenv(strings.ToUpper(f.Name)); s != "" {
+				f.Value.Set(s)
+			}
+		})
+		flag.Parse()
+	} else {
+		mode = "test"
+	}
+
+	config := config.SetEnvironment(mode)
 
 	DBMS := "mysql"
 	USER := config.User
