@@ -1,7 +1,7 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"os"
 
 	"github.com/alexsasharegan/dotenv"
@@ -23,10 +23,9 @@ import (
 // @BasePath /
 func main() {
 
-	err := dotenv.Load()
-	if err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
-	}
+	_ = dotenv.Load()
+
+	fmt.Println("mode: ", os.Getenv("MODE"))
 
 	AllowOrigins := []string{"http://localhost", "*"}
 	AllowHeaders := []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept}

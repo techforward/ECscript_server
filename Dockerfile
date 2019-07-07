@@ -10,7 +10,7 @@ COPY . .
 RUN go get -v ./...
 
 # RUN cp /workspace/secrets/app-credential.json app-credential.json
-# ENV GOOGLE_APPLICATION_CREDENTIALS /app-credential.json
+ENV GOOGLE_APPLICATION_CREDENTIALS /app-credential.json
 
 # Build the command inside the container.
 # (You may fetch or manage dependencies here,

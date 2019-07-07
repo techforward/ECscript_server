@@ -2,6 +2,7 @@ package db
 
 import (
 	"flag"
+	"fmt"
 	"os"
 	"strings"
 
@@ -33,12 +34,23 @@ func ConnectGORM() *gorm.DB {
 	PASS := config.Password
 	IP := config.IP
 	PORT := config.Port
-	PROTOCOL := "tcp(" + IP + ":" + PORT + ")"
 	DBNAME := config.Name
-	PARSETIME := "parseTime=true"
 	//TIMEZONE := "loc=Asia%2FTokyo"
 
-	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + "?" + PARSETIME //+ "&" + TIMEZONE
+	var PARSETIME string
+	var PROTOCOL string
+	if os.Getenv("MODE") != "production" {
+		PROTOCOL = "tcp(" + IP + ":" + PORT + ")"
+		PARSETIME = "?parseTime=true"
+	} else {
+		// Cloud SQL
+		PROTOCOL = "unix(/cloudsql/" + IP + ")"
+		PARSETIME = ""
+	}
+
+	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + PARSETIME //+ "&" + TIMEZONE
+	fmt.Println("CONNECT: " + CONNECT)
+
 	db, err := gorm.Open(DBMS, CONNECT)
 
 	if err != nil {

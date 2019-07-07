@@ -1,6 +1,8 @@
 ## API server
 
-https://test-4eayrshuaa-uc.a.run.app/swagger/index.html
+https://stage3-4eayrshuaa-uc.a.run.app
+
+https://stage3-4eayrshuaa-uc.a.run.app/swagger/index.html
 
 ### Pre
 

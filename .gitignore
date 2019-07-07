@@ -1,2 +1,3 @@
 .env
 development.dump.sql
+app-credential.json
