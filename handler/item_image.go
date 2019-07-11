@@ -151,12 +151,16 @@ func UpdateItemImage(c echo.Context) error {
 func DeleteItemImage(c echo.Context) error {
 	itemImageUlid := c.Param("imageUlid")
 	itemImage := new(models.ItemImage)
-	if itemImage.Ulid == "" {
-		itemImage.Ulid = itemImageUlid
-	}
 
 	db := db.ConnectGORM()
 	db.SingularTable(true)
+	if err := db.Where("ulid = ?", itemImageUlid).First(&itemImage).Error; err != nil {
+		return echo.NewHTTPError(http.StatusNotFound, err)
+	}
+
+	util.DeleteImage(itemImage.Path)
+	itemImage.Path = ""
+
 	if err := db.Delete(&itemImage).Error; err != nil {
 		return echo.NewHTTPError(http.StatusNotFound, err)
 	}

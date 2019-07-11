@@ -10,6 +10,7 @@ import (
 	"github.com/oklog/ulid"
 )
 
+// NewUlid NewUlid
 func NewUlid() string {
 	t := time.Now()
 	seed, _ := crand.Int(crand.Reader, big.NewInt(math.MaxInt64))

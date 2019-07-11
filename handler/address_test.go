@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"github.com/techforward/ECscript_server/models"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -10,12 +9,14 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/techforward/ECscript_server/models"
+
 	"github.com/labstack/echo"
 	"github.com/stretchr/testify/assert"
 )
 
 var (
-	AddressDeletedMessage string = "\"Address Deleted successfully\"\n"
+	AddressDeletedMessage = "\"Address Deleted successfully\"\n"
 
 	createdAddress models.Address
 	gotAddress     models.Address

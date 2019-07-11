@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo"
 )
 
+// AddressRouter AddressRouter
 func AddressRouter(e *echo.Echo) {
 	g := e.Group("/address")
 

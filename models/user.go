@@ -6,6 +6,7 @@ import (
 	"github.com/badoux/checkmail"
 )
 
+// User UserTable
 type User struct {
 	// gorm:"primary_key"を消すとテーブルが空っぽになる
 	Ulid        string  `json:"ulid" example:"0000XSNJG0MQJHBF4QX1EFD6Y3" gorm:"primary_key"`

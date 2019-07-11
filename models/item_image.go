@@ -4,6 +4,7 @@ import (
 	"time"
 )
 
+// ItemImage ItemImageTable
 type ItemImage struct {
 	Ulid     string `json:"ulid" example:"0000XSNJG0MQJHBF4QX1EFD6Y3" gorm:"primary_key"`
 	ItemUlid string `json:"itemUlid" example:"0000XSNJG0JFGRHF4QX1EFD6Y3"`

@@ -4,6 +4,7 @@ import (
 	"time"
 )
 
+// Order OrderTable
 type Order struct {
 	Ulid        string `json:"ulid" example:"0000XSNJG0MQJHBF4QX1EFD6Y3" gorm:"primary_key"`
 	UserUlid    string `json:"userUlid" example:"0000XSNJG0JFGRHF4QX1EFD6Y3"`

@@ -4,6 +4,7 @@ import (
 	"time"
 )
 
+// Address 住所テーブル
 type Address struct {
 	Ulid     string `json:"ulid" example:"0000XSNJG0MQJHBF4QX1EFD6Y3" gorm:"primary_key"`
 	Postcode string `json:"postcode" example:"163-0011"`

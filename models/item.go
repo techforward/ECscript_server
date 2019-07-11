@@ -4,6 +4,7 @@ import (
 	"time"
 )
 
+// Item ItemTable
 type Item struct {
 	Ulid     string `json:"ulid" example:"0000XSNJG0MQJHBF4QX1EFD6Y3" gorm:"primary_key"`
 	Name     string `json:"name" example:"item name"`

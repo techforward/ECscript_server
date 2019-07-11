@@ -11,6 +11,7 @@ import (
 	"cloud.google.com/go/storage"
 )
 
+// UploadImage add item image
 func UploadImage(fileHeader *multipart.FileHeader, filePath string) (string, error) {
 	file, _ := fileHeader.Open()
 	ctx := context.Background()
@@ -38,4 +39,21 @@ func UploadImage(fileHeader *multipart.FileHeader, filePath string) (string, err
 
 	u, _ := url.Parse("/" + "ecsite" + "/" + w.Attrs().Name)
 	return "https://storage.googleapis.com" + u.EscapedPath(), nil
+}
+
+// DeleteImage Delete Item image
+func DeleteImage(filePath string) (bool, error) {
+	ctx := context.Background()
+	client, err := storage.NewClient(ctx) // クライアント作成
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer client.Close()
+
+	o := client.Bucket("ecsite").Object(filePath)
+
+	if err := o.Delete(ctx); err != nil {
+		return false, err
+	}
+	return true, nil
 }

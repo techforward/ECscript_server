@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"github.com/techforward/ECscript_server/models"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -10,12 +9,14 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/techforward/ECscript_server/models"
+
 	"github.com/labstack/echo"
 	"github.com/stretchr/testify/assert"
 )
 
 var (
-	OrderDeletedMessage string = "\"Order Deleted successfully\"\n"
+	OrderDeletedMessage = "\"Order Deleted successfully\"\n"
 
 	createdOrder models.Order
 	gotOrder     models.Order

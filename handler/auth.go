@@ -1,10 +1,11 @@
 package handler
 
 import (
-	"github.com/techforward/ECscript_server/models"
-	"github.com/techforward/ECscript_server/util"
 	"net/http"
 	"time"
+
+	"github.com/techforward/ECscript_server/models"
+	"github.com/techforward/ECscript_server/util"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"
@@ -43,7 +44,7 @@ func VeryfyIDToken(c echo.Context) error {
 	firebaseToken := c.Param("token")
 
 	// Throws unauthorized error
-	isVerified, tokenStruct, _ := util.VerifyUidToken(firebaseToken)
+	isVerified, tokenStruct, _ := util.VerifyUIDToken(firebaseToken)
 	if !isVerified {
 		return echo.ErrUnauthorized
 	}

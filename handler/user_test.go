@@ -16,7 +16,7 @@ import (
 )
 
 var (
-	UserDeletedMessage string = "\"User Deleted successfully\"\n"
+	UserDeletedMessage = "\"User Deleted successfully\"\n"
 
 	createdUser models.User
 	gotUser     models.User
