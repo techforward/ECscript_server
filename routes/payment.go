@@ -12,5 +12,5 @@ func PaymentRouter(e *echo.Echo) {
 
 	stripe := g.Group("/stripe")
 
-	stripe.POST("/", handler.StripeCharge)
+	stripe.POST("", handler.StripeCharge)
 }

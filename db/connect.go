@@ -1,10 +1,8 @@
 package db
 
 import (
-	"flag"
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -12,21 +10,27 @@ import (
 	"github.com/techforward/ECscript_server/config"
 )
 
+// ConnectGORM ConnectGORM
 func ConnectGORM() *gorm.DB {
 	var mode string
 
-	if flag.Lookup("test.v") == nil {
-		flag.StringVar(&mode, "mode", "test", "run mode")
-		flag.VisitAll(func(f *flag.Flag) {
-			if s := os.Getenv(strings.ToUpper(f.Name)); s != "" {
-				f.Value.Set(s)
-			}
-		})
-		flag.Parse()
-	} else {
-		mode = "test"
-	}
+	// if os.Getenv("MODE") != "production" {
 
+	// 	if flag.Lookup("test.v") == nil {
+	// 		flag.StringVar(&mode, "mode", "test", "run mode")
+	// 		flag.VisitAll(func(f *flag.Flag) {
+	// 			if s := os.Getenv(strings.ToUpper(f.Name)); s != "" {
+	// 				f.Value.Set(s)
+	// 			}
+	// 		})
+	// 		flag.Parse()
+	// 	} else {
+	// 		mode = "test"
+	// 	}
+
+	// } else {
+	mode = os.Getenv("MODE")
+	// }
 	config := config.SetEnvironment(mode)
 
 	DBMS := "mysql"
@@ -45,7 +49,7 @@ func ConnectGORM() *gorm.DB {
 	} else {
 		// Cloud SQL
 		PROTOCOL = "unix(/cloudsql/" + IP + ")"
-		PARSETIME = ""
+		PARSETIME = "?parseTime=true"
 	}
 
 	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + PARSETIME //+ "&" + TIMEZONE

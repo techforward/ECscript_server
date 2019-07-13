@@ -10,9 +10,9 @@ import (
 	"github.com/techforward/ECscript_server/util"
 )
 
-// GetAllAddresses is getting all addresses.
-// @Summary get all addresses
-// @Description get all addresses in a ECsite
+// GetAllAddresses is getting 全てのアドレス.
+// @Summary get 全てのアドレス
+// @Description get 全てのアドレス in a ECsite
 // @Tags Address
 // @Accept  json
 // @Produce  json
@@ -26,12 +26,13 @@ func GetAllAddresses(c echo.Context) error {
 	db.Find(&addresses)
 	defer db.Close()
 
+	// c.Logger().Print(addresses)
 	return c.JSON(http.StatusOK, addresses)
 }
 
-// GetAddress is getting address.
-// @Summary get address
-// @Description get address in a ECsite
+// GetAddress is getting アドレス.
+// @Summary get アドレス
+// @Description get アドレス in a ECsite
 // @Tags Address
 // @Accept  json
 // @Produce  json
@@ -39,21 +40,26 @@ func GetAllAddresses(c echo.Context) error {
 // @Router /address/{id} [get]
 func GetAddress(c echo.Context) error {
 	addressUlid := c.Param("id")
+	// fmt.Println("addressUlid: ", addressUlid)
+	// c.Logger().Print(addressUlid)
+	// c.Echo().Logger.Debug("debug at handler", addressUlid)
 	var address models.Address
 
 	db := db.ConnectGORM()
 	db.SingularTable(true)
 	if err := db.Where("ulid = ?", addressUlid).First(&address).Error; err != nil {
-		return echo.NewHTTPError(http.StatusNotFound, err)
+		// return echo.NewHTTPError(http.StatusNotFound, err)
+		return c.JSON(http.StatusBadRequest, err)
 	}
 	defer db.Close()
 
+	// fmt.Println("address: ", address)
 	return c.JSON(http.StatusOK, address)
 }
 
-// CreateAddress is creating address.
-// @Summary create new address
-// @Description create new address in a ECsite
+// CreateAddress is 作成 アドレス.
+// @Summary create new アドレス
+// @Description create new アドレス in a ECsite
 // @Tags Address
 // @Accept  json
 // @Produce  json
@@ -82,9 +88,9 @@ func CreateAddress(c echo.Context) error {
 	return c.JSON(http.StatusOK, address)
 }
 
-// UpdateAddress is updating address.
-// @Summary Update address
-// @Description updating address in a ECsite
+// UpdateAddress is updating アドレス.
+// @Summary Update アドレス
+// @Description updating アドレス in a ECsite
 // @Tags Address
 // @Accept  json
 // @Produce  json
@@ -111,9 +117,9 @@ func UpdateAddress(c echo.Context) error {
 	return c.JSON(http.StatusOK, address)
 }
 
-// DeleteAddress is deleting address.
-// @Summary Delete address
-// @Description deleting address in a ECsite
+// DeleteAddress is 削除 アドレス.
+// @Summary Delete アドレス
+// @Description deleting アドレス in a ECsite
 // @Tags Address
 // @Accept  json
 // @Produce  json

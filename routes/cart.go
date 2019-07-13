@@ -10,10 +10,10 @@ import (
 func CartRouter(e *echo.Echo) {
 	g := e.Group("/cart")
 
-	g.GET("/", handler.GetAllCarts)
+	g.GET("", handler.GetAllCarts)
 	g.GET("/:id", handler.GetCart)
 
-	g.POST("/", handler.CreateCart)
+	g.POST("", handler.CreateCart)
 	g.PUT("/:id", handler.UpdateCart)
 	g.DELETE("/:id", handler.DeleteCart)
 

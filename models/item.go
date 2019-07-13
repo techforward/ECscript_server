@@ -9,8 +9,8 @@ type Item struct {
 	Ulid     string `json:"ulid" example:"0000XSNJG0MQJHBF4QX1EFD6Y3" gorm:"primary_key"`
 	Name     string `json:"name" example:"item name"`
 	Context  string `json:"context" example:"item context"`
-	Amount   int    `json:"amount" example:"4" format:"int64"`
-	Priority int    `json:"priority" example:"1" format:"int64"`
+	Amount   uint   `json:"amount" example:"4"`
+	Priority uint   `json:"priority" example:"1"`
 
 	// CreatedAt, UpdatedAt, DeleteAt という time.Time 型のメンバを追加すると、
 	// GORM側でここに追加・更新・削除日時を自動的に入るようになる。

@@ -10,10 +10,10 @@ import (
 func ItemRouter(e *echo.Echo) {
 	g := e.Group("/item")
 
-	g.GET("/", handler.GetAllItems)
+	g.GET("", handler.GetAllItems)
 	g.GET("/:id", handler.GetItem)
 
-	g.POST("/", handler.CreateItem)
+	g.POST("", handler.CreateItem)
 	g.PUT("/:id", handler.UpdateItem)
 	g.DELETE("/:id", handler.DeleteItem)
 
@@ -23,7 +23,7 @@ func ItemRouter(e *echo.Echo) {
 	// loginRequired.PUT("/:id", handler.UpdateItem)
 	// loginRequired.DELETE("/:id", handler.DeleteItem)
 
-	image := g.Group("/image")
+	image := g.Group("/:id/image")
 	image.GET("/", handler.GetAllItemImages)
 
 	image.POST("/", handler.CreateItemImage)

@@ -11,8 +11,8 @@ import (
 )
 
 // GetAllOrders godoc
-// @Summary 商品リスト
-// @Description 商品をリストで返す
+// @Summary オーダーリスト
+// @Description オーダーをリストで返す
 // @Tags Order
 // @Accept  json
 // @Produce  json
@@ -31,8 +31,8 @@ func GetAllOrders(c echo.Context) error {
 }
 
 // GetOrder godoc
-// @Summary 商品
-// @Description 商品を返す
+// @Summary オーダー
+// @Description オーダーを返す
 // @Tags Order
 // @Accept  json
 // @Produce  json
@@ -53,9 +53,9 @@ func GetOrder(c echo.Context) error {
 	return c.JSON(http.StatusOK, order)
 }
 
-// CreateOrder is creating order.
-// @Summary create new order
-// @Description create new order in a ECsite
+// CreateOrder is creating オーダー.
+// @Summary create new オーダー
+// @Description create new オーダー in a ECsite
 // @Tags Order
 // @Accept  json
 // @Produce  json
@@ -84,9 +84,9 @@ func CreateOrder(c echo.Context) error {
 	return c.JSON(http.StatusOK, order)
 }
 
-// UpdateOrder is updating order.
-// @Summary Update order
-// @Description updating order in a ECsite
+// UpdateOrder is updating オーダー.
+// @Summary Update オーダー
+// @Description updating オーダー in a ECsite
 // @Tags Order
 // @Accept  json
 // @Produce  json
@@ -113,9 +113,9 @@ func UpdateOrder(c echo.Context) error {
 	return c.JSON(http.StatusOK, order)
 }
 
-// DeleteOrder is deleting order.
-// @Summary Delete order
-// @Description deleting order in a ECsite
+// DeleteOrder is deleting オーダー.
+// @Summary Delete オーダー
+// @Description deleting オーダー in a ECsite
 // @Tags Order
 // @Accept  json
 // @Produce  json

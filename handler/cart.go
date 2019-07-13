@@ -10,9 +10,9 @@ import (
 	"github.com/techforward/ECscript_server/util"
 )
 
-// GetAllCarts is getting all carts.
-// @Summary get all carts
-// @Description get all carts in a ECsite
+// GetAllCarts is getting 全てのカート.
+// @Summary get 全てのカート
+// @Description get 全てのカート in a ECsite
 // @Tags Cart
 // @Accept  json
 // @Produce  json
@@ -29,9 +29,9 @@ func GetAllCarts(c echo.Context) error {
 	return c.JSON(http.StatusOK, carts)
 }
 
-// GetCart is getting cart.
-// @Summary get cart
-// @Description get cart in a ECsite
+// GetCart is getting カート.
+// @Summary get カート
+// @Description get カート in a ECsite
 // @Tags Cart
 // @Accept  json
 // @Produce  json
@@ -51,9 +51,9 @@ func GetCart(c echo.Context) error {
 	return c.JSON(http.StatusOK, cart)
 }
 
-// CreateCart is creating cart.
-// @Summary create new cart
-// @Description create new cart in a ECsite
+// CreateCart is creating カート.
+// @Summary create new カート
+// @Description create new カート in a ECsite
 // @Tags Cart
 // @Accept  json
 // @Produce  json
@@ -82,9 +82,9 @@ func CreateCart(c echo.Context) error {
 	return c.JSON(http.StatusOK, cart)
 }
 
-// UpdateCart is updating cart.
-// @Summary Update cart
-// @Description updating cart in a ECsite
+// UpdateCart is updating カート.
+// @Summary Update カート
+// @Description updating カート in a ECsite
 // @Tags Cart
 // @Accept  json
 // @Produce  json
@@ -111,9 +111,9 @@ func UpdateCart(c echo.Context) error {
 	return c.JSON(http.StatusOK, cart)
 }
 
-// DeleteCart is deleting cart.
-// @Summary Delete cart
-// @Description deleting cart in a ECsite
+// DeleteCart is deleting カート.
+// @Summary Delete カート
+// @Description deleting カート in a ECsite
 // @Tags Cart
 // @Accept  json
 // @Produce  json

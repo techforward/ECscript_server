@@ -13,4 +13,5 @@ func Router(e *echo.Echo) {
 	OrderRouter(e)
 	UserRouter(e)
 	UserAddressRouter(e)
+	OtherRouter(e)
 }

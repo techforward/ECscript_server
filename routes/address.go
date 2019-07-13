@@ -11,7 +11,7 @@ func AddressRouter(e *echo.Echo) {
 	g := e.Group("/address")
 
 	g.GET("", handler.GetAllAddresses)
-	g.GET(":id", handler.GetAddress)
+	g.GET("/:id", handler.GetAddress)
 
 	g.POST("", handler.CreateAddress)
 	g.PUT(":id", handler.UpdateAddress)

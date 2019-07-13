@@ -73,7 +73,7 @@ func CreateItemImage(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusNotFound, err)
 	}
 
-	itemImage.Path, err = util.UploadImage(fileHeader, fileHeader.Filename)
+	itemImage.Path, err = util.UploadImage(fileHeader, fileHeader.Filename+itemUlid)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusNotFound, err)
 	}
@@ -120,8 +120,11 @@ func UpdateItemImage(c echo.Context) error {
 	if err != nil {
 		return echo.NewHTTPError(http.StatusNotFound, err)
 	}
-
-	itemImage.Path, err = util.UploadImage(fileHeader, fileHeader.Filename)
+	_, err = util.DeleteImage(itemImage.Path)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusNotFound, err)
+	}
+	itemImage.Path, err = util.UploadImage(fileHeader, fileHeader.Filename+itemImage.Ulid)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusNotFound, err)
 	}

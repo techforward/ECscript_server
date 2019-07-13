@@ -12,8 +12,8 @@ import (
 )
 
 // GetAllUsers godoc
-// @Summary 商品リスト
-// @Description 商品をリストで返す
+// @Summary ユーザーリスト
+// @Description ユーザーをリストで返す
 // @Tags User
 // @Accept  json
 // @Produce  json
@@ -32,8 +32,8 @@ func GetAllUsers(c echo.Context) error {
 }
 
 // GetUser godoc
-// @Summary 商品
-// @Description 商品を返す
+// @Summary ユーザー
+// @Description ユーザーを返す
 // @Tags User
 // @Accept  json
 // @Produce  json
@@ -54,9 +54,9 @@ func GetUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, user)
 }
 
-// CreateUser is creating user.
-// @Summary create new user
-// @Description create new user in a ECsite
+// CreateUser is creating ユーザー.
+// @Summary create new ユーザー
+// @Description create new ユーザー in a ECsite
 // @Tags User
 // @Accept  json
 // @Produce  json
@@ -85,8 +85,8 @@ func CreateUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, user)
 }
 
-// UpdateUser is updating user.
-// @Summary Update user
+// UpdateUser is updating ユーザー.
+// @Summary Update ユーザー
 // @Description updating user in a ECsite
 // @Tags User
 // @Accept  json
@@ -123,9 +123,9 @@ func UpdateUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, user)
 }
 
-// DeleteUser is deleting user.
-// @Summary Delete user
-// @Description deleting user in a ECsite
+// DeleteUser is deleting ユーザー.
+// @Summary Delete ユーザー
+// @Description deleting ユーザー in a ECsite
 // @Tags User
 // @Accept  json
 // @Produce  json

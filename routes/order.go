@@ -10,10 +10,10 @@ import (
 func OrderRouter(e *echo.Echo) {
 	g := e.Group("/order")
 
-	g.GET("/", handler.GetAllOrders)
+	g.GET("", handler.GetAllOrders)
 	g.GET("/:id", handler.GetOrder)
 
-	g.POST("/", handler.CreateOrder)
+	g.POST("", handler.CreateOrder)
 	g.PUT("/:id", handler.UpdateOrder)
 	g.DELETE("/:id", handler.DeleteOrder)
 

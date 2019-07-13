@@ -11,8 +11,8 @@ import (
 )
 
 // GetAllItems godoc
-// @Summary 商品リスト
-// @Description 商品をリストで返す
+// @Summary Itemリスト
+// @Description Itemをリストで返す
 // @Tags Item
 // @Accept  json
 // @Produce  json

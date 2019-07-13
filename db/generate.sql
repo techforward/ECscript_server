@@ -182,6 +182,22 @@ CREATE TABLE `item_image` (
 );
 
 -- ---
+-- Table 'other'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `other`;
+		
+CREATE TABLE `other` (
+  `ulid` VARCHAR(32) NOT NULL,
+  `name` VARCHAR(128) NULL DEFAULT NULL,
+  `path` VARCHAR(2048) NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT NULL,
+  `updated_at` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`ulid`)
+);
+
+-- ---
 -- Foreign Keys 
 -- ---
 

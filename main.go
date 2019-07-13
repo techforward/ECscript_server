@@ -19,7 +19,7 @@ import (
 // @description API for the ECSite
 // @license.name Techforward Inc.
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
-// @host localhost:1323
+// @host https://stage3-4eayrshuaa-uc.a.run.app
 // @BasePath /
 func main() {
 
@@ -35,6 +35,7 @@ func main() {
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	// Middleware
+	e.Debug = true
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
