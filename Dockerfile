@@ -9,6 +9,8 @@ COPY . .
 
 RUN go get -v ./...
 
+RUN ls
+
 # RUN cp /workspace/secrets/app-credential.json app-credential.json
 ENV GOOGLE_APPLICATION_CREDENTIALS app-credential.json
 
@@ -25,9 +27,9 @@ RUN apk add --no-cache ca-certificates
 
 # Copy the binary to the production image from the builder stage.
 COPY --from=builder /go/src/github.com/techforward/ECscript_server/ECscript_server ECscript_server
-COPY --from=builder /go/src/github.com/techforward/ECscript_server/app-credential.json app-credential.json
+COPY --from=builder /go/src/github.com/techforward/ECscript_server/app-credential.json.enc app-credential.json.enc
 
-ENV GOOGLE_APPLICATION_CREDENTIALS app-credential.json
+ENV GOOGLE_APPLICATION_CREDENTIALS app-credential.json.enc
 ENV MODE production
 ENV PORT 1323
 EXPOSE 1323

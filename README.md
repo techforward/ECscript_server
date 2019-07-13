@@ -4,19 +4,33 @@ https://stage3-4eayrshuaa-uc.a.run.app
 
 https://stage3-4eayrshuaa-uc.a.run.app/swagger/index.html
 
-### Pre
 
+### デプロイ
+
+```terminal
+gcloud config set project ecsite-242111
+gcloud builds submit --tag gcr.io/ecsite-242111/github.com/techforward/ecscript_server/stage
+gcloud beta run deploy --image gcr.io/ecsite-242111/github.com/techforward/ecscript_server/stage --platform managed
+stage3
+```
 https://cloud.google.com/cloud-build/docs/securing-builds/use-encrypted-secrets-credentials?hl=ja
-
 
 ### Docs
 
+Create Address `POST /addresses`
 ```
-swag i
-go run main.go
+{
+    ulid: "xxxxxxxxxxx",
+    postcode: "0000000",
+    address1: "abc, def, ghi",
+    address2: "2-22-2"
+}
 ```
-http://localhost:1323/swagger/index.html
 
+Create Auth `GET /auth/{firebase_token}`
+```
+return JWT
+```
 
 ### Build
 
