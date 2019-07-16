@@ -3,3 +3,4 @@ handler/.env
 development.dump.sql
 EcSite-1ad41b8cedc9.json
 app-credential.json.enc
+tmp/
